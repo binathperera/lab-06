@@ -1,4 +1,5 @@
 package com.example.library.controller;
+
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import com.example.library.model.Book;
 import com.example.library.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
 @RequestMapping("/api/books")
@@ -23,8 +25,8 @@ public class BookController {
     public Book getBookById(@PathVariable String id) {
         return bookService.getBookById(id);
     }
-    
-    @GetMapping("/")
+
+    @GetMapping
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
@@ -36,6 +38,7 @@ public class BookController {
 
     @PostMapping("/add")
     public Book addBook(@RequestBody Book book) {
+        book.setId(null); // Ensure ID is null for new book
         return bookService.addBook(book);
     }
 
@@ -48,7 +51,7 @@ public class BookController {
     public void deleteBook(@PathVariable String id) {
         bookService.deleteBook(id);
     }
-    
+
     @DeleteMapping("/delete/year/{year}")
     public void deleteBooksByYear(@PathVariable int year) {
         bookService.deleteBooksbyYear(year);
@@ -58,5 +61,5 @@ public class BookController {
     public String getGenre(@PathVariable String id) {
         return bookService.getGenre(id);
     }
-    
+
 }

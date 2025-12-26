@@ -19,5 +19,6 @@ public class Book {
     private String author;
     private String genre;
     private int publicationYear;
+    private int copies;
     private String shelfLocation;
 }
